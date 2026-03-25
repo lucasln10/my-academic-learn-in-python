@@ -1,5 +1,5 @@
-import repository.UserRepository
-userRepository = repository.UserRepository
+import UserRepository
+userRepository = UserRepository
 
 def validateParans(nome, idade, email):
     if nome == None or idade == 0 or email == None: return False

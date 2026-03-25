@@ -1,6 +1,6 @@
-import entity.User
+import User
 
-user = entity.User
+user = User
 banco = user.banco
 cursor = user.cursor
 
