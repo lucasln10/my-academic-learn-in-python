@@ -1,21 +1,14 @@
 import UserRepository
 userRepository = UserRepository
 
-def validateParans(nome, idade, email):
-    if nome == None or idade == 0 or email == None: return False
-    return True
-    
-
 def createUser(name, idade, email):
-    if validateParans(name, idade, email): print("params invalidos")
-    try:            
+    try:
         userRepository.create(name, idade, email)
         print("Usuario criado com sucesso!\n")
     except:
         print("Erro ao adicionar usuario no banco de dados.\n")
 
 def updateUser(id, name, idade, email):
-    if validateParans(name, idade, email): print("params invalidos")
     try:            
         userRepository.update(id, name, idade, email)
         print("Usuario atualizado com sucesso!\n")
@@ -23,7 +16,7 @@ def updateUser(id, name, idade, email):
         print("Erro ao atualizar usuario no banco de dados.\n")
 
 def deleteUser(id):
-    if id == None:
+    if id is 0:
         print("Id is null")
         return
     try:            
@@ -33,7 +26,7 @@ def deleteUser(id):
         print("Erro ao deletar usuario no banco de dados.\n")
 
 def allGets():
-    whatParam = int(input("Gostaria de procurar os usuarios do banco usando o\n1 - ID\n2 - Nome\n3 - Idade\n 4 - Email?\nR:"))
+    whatParam = int(input("Gostaria de procurar os usuarios do banco usando o\n1 - ID\n2 - Nome\n3 - Idade\n4 - Email?\n5 - Todos\nR:"))
     print("\n")
     if whatParam == 1:
         paramId = int(input("Digite o id que gostaria de buscar: "))
@@ -48,7 +41,8 @@ def allGets():
         paramEmail = input("Digite o email que gostaria de buscar: ")
         print(userRepository.getByEmail(paramEmail))
     else:
-        print("Nenhum para valido")
+        print(userRepository.getAllUsers())
+
 
 def options(option):
     if option == 1:
