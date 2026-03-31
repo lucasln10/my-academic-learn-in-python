@@ -1,16 +1,16 @@
-import requests
+import os, httpx
 from groq import Groq
 
-#dentro dos colocar a chave da api
 client = Groq()
 
-def inviteMessage(message):
+def inviteMessage(message: str) -> str:
+    prompt = "você é um engenheiro de software muito experiente responda todas as perguntas da forna correta e sem enrolacao, quero respostas diretas com poucas linhas: " + message
     completion = client.chat.completions.create(
         model="openai/gpt-oss-120b",
         messages=[
         {
             "role": "user",
-            "content": message
+            "content": prompt
         }
         ],
         temperature=1,
@@ -21,14 +21,10 @@ def inviteMessage(message):
         stop=None
     )
 
+    response = ""
+
     for chunk in completion:
-        print(chunk.choices[0].delta.content or "", end="")
+        if chunk.choices[0].delta.content:
+            response += chunk.choices[0].delta.content
 
-
-def inputForMessage():
-    print("Faca uma pergunta qualquer: ")
-    message = input()
-    print("\n")
-    inviteMessage(message)
-
-inputForMessage()
+    return response
