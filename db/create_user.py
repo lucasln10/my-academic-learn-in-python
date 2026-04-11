@@ -1,7 +1,6 @@
-import model
+import conecction
 
-cursor = model.cursor
-banco = model.banco
+cursor = conecction.cursor
 
 def validateParans(nome, idade, email):
     if nome == None or idade == 0 or email == None: return False
@@ -13,7 +12,7 @@ def create(name, idade, email):
     try:            
         create = f"INSERT INTO users(nome, idade, email) VALUES('{name}', {idade}, '{email}')"
         cursor.execute(create)
-        banco.commit()
+        conecction.banco.commit()
         print("Usuario criado com sucesso!\n")
     except:
         print("Erro ao adicionar usuario no banco de dados.\n")
@@ -23,7 +22,7 @@ def updateUser(id, name, idade, email):
     try:            
         update = f"UPDATE users SET nome = '{name}', idade = {idade}, email = '{email}' WHERE id = {id}"
         cursor.execute(update)
-        banco.commit()
+        conecction.banco.commit()
         print("Usuario atualizado com sucesso!\n")
     except:
         print("Erro ao atualizar usuario no banco de dados.\n")
@@ -35,7 +34,7 @@ def deleteUser(id):
     try:            
         delete = f"DELETE FROM users WHERE id = {id}" #AND name = {name} AND idade = {idade} AND email = {email}"
         cursor.execute(delete)
-        model.banco.commit()
+        conecction.banco.commit()
         print("Usuario deletado com sucesso!\n")
     except:
         print("Erro ao deletar usuario no banco de dados.\n")
