@@ -1,29 +1,13 @@
-import os, httpx
-from groq import Groq
+from ollama import chat
+from ollama import ChatResponse
 
-client = Groq(api_key="")
+def chatAi(text):
+    response: ChatResponse = chat(model='qwen3.5:397b-cloud ', messages=[
+    {
+        'role': 'user',
+        'content': text,
+    },
+    ])
+    return response.message.content
 
-def inviteMessage(message: str) -> str:
-    prompt = "você é um engenheiro de software muito experiente responda todas as perguntas da forna correta e sem enrolacao, quero respostas diretas com poucas linhas: " + message
-    completion = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-        {
-            "role": "user",
-            "content": prompt
-        }
-        ],
-        temperature=1,
-        max_completion_tokens=1024,
-        top_p=1,
-        stream=True,
-        stop=None
-    )
-
-    response = ""
-
-    for chunk in completion:
-        if chunk.choices[0].delta.content:
-            response += chunk.choices[0].delta.content
-
-    return response
+print(chatAi("Ola"))

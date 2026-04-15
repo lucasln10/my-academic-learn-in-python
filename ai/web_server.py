@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template_string
-from ai_server import inviteMessage
+from ai_server import chatAi
 
 app = Flask(__name__)
 
@@ -154,7 +154,7 @@ def index():
 def chat():
     payload = request.get_json()
     user_msg = payload.get('message', '')
-    reply = inviteMessage(user_msg)
+    reply = chatAi(user_msg)
     return jsonify({'reply': reply})
 
 @app.route('/ping')
@@ -163,3 +163,11 @@ def ping():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
+
+
+# $env:CLAUDE_CODE_USE_OPENAI="1"
+# $env:OPENAI_BASE_URL="http://localhost:11434/api"
+# $env:OPENAI_API_KEY="anything"
+# $env:OPENAI_MODEL="qwen3.5:397b-cloud"
+
+# npx.cmd openclaude
