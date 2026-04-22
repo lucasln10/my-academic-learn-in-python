@@ -170,4 +170,4 @@ if __name__ == '__main__':
 # $env:OPENAI_API_KEY="anything"
 # $env:OPENAI_MODEL="qwen3.5:397b-cloud"
 
-# npx.cmd openclaude
+# npx openclaude
