@@ -16,4 +16,13 @@ escolha = secrets.choice(cores)
 senha_1 = "hershell"
 senha_2 = "hershell"
 comparador = secrets.compare_digest(senha_1, senha_2)
-print(comparador)
+# print(comparador)
+
+
+def gerar_id_secao():
+    return secrets.token_hex(30)
+
+id_user = 1
+
+secao = gerar_id_secao()
+print(f"user: {id_user} | secao: {secao}")
